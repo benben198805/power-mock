@@ -8,15 +8,18 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
-import org.mockito.Mockito;
 import org.powermock.api.mockito.PowerMockito;
 import org.powermock.core.classloader.annotations.PrepareForTest;
+import org.powermock.core.classloader.annotations.SuppressStaticInitializationFor;
 import org.powermock.modules.junit4.PowerMockRunner;
 
 import java.math.BigDecimal;
 
+import static org.mockito.ArgumentMatchers.anyLong;
+
 @RunWith(PowerMockRunner.class)
 @PrepareForTest(TimeUnit.class)
+@SuppressStaticInitializationFor("com.xxx.xxx.utils.SalaryCalculator")
 public class PersonServiceTest {
     @InjectMocks
     private PersonService personService;
@@ -24,7 +27,7 @@ public class PersonServiceTest {
     @Before
     public void setUp() throws Exception {
         PowerMockito.mockStatic(TimeUnit.class);
-        PowerMockito.doNothing().when(TimeUnit.class, "sleep", Mockito.anyLong());
+        PowerMockito.doNothing().when(TimeUnit.class, "sleep", anyLong());
     }
 
     @Test
